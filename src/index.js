@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Form, Button } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css'
 
 // fake data generator
 const getItems = count =>
@@ -43,7 +46,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: getItems(10)
+      itemsLeft: [{id: 'empty - 0', content: "empty"}],
+      itemsRight: [{id: 'empty - 0', content: "empty"}]
     };
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -69,36 +73,96 @@ class App extends Component {
   // But in this example everything is just done in one place for simplicity
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {this.state.items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      style={getItemStyle(
-                        snapshot.isDragging,
-                        provided.draggableProps.style
-                      )}
-                    >
-                      {item.content}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <body className="container-fluid">
+        <div class="text-center my-5">
+            <h1>Hindi - Awadhi Translate</h1>
+        </div>
+        <div className="row">
+          <div className="col-5">
+            <Form>
+              <Form.Group>
+                  <Form.Control id="hindi_phrase" type="email" placeholder="Enter Hindi sentence/phrase" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-5">
+            <Form>
+              <Form.Group>
+                <Form.Control id="awadhi_phrase" type="email" placeholder="Enter Awadhi sentence/phrase" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-2">
+            <Button>Generate</Button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-6">
+            <DragDropContext onDragEnd={this.onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                  >
+                    {this.state.items.map((item, index) => (
+                      <Draggable key={item.id} draggableId={item.id} index={index}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            {item.content}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+          <div className="col-6">
+            <DragDropContext onDragEnd={this.onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                  >
+                    {this.state.items.map((item, index) => (
+                      <Draggable key={item.id} draggableId={item.id} index={index}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            {item.content}
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+        </div>
+      </body>
     );
   }
 }
