@@ -6,11 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
 // fake data generator
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`
-  }));
+// const getItems = count =>
+//   Array.from({ length: count }, (v, k) => k).map(k => ({
+//     id: `item-${k}`,
+//     content: `item ${k}`
+//   }));
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -49,23 +49,64 @@ class App extends Component {
       itemsLeft: [{id: 'empty - 0', content: "empty"}],
       itemsRight: [{id: 'empty - 0', content: "empty"}]
     };
-    this.onDragEnd = this.onDragEnd.bind(this);
+    this.onDragEndLeft = this.onDragEndLeft.bind(this);
+    this.onDragEndRight = this.onDragEndRight.bind(this);
   }
 
-  onDragEnd(result) {
+  onDragEndLeft(result) {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
     const items = reorder(
-      this.state.items,
+      this.state.itemsLeft,
       result.source.index,
       result.destination.index
     );
 
     this.setState({
-      items
+      itemsLeft: items
+    });
+  }
+
+  onDragEndRight(result) {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
+    }
+
+    const items = reorder(
+      this.state.itemsRight,
+      result.source.index,
+      result.destination.index
+    );
+
+    this.setState({
+      itemsRight: items
+    });
+  }
+
+  prepare = (hindi_phrase, awadhi_phrase) => {
+    if(!hindi_phrase || !awadhi_phrase)
+      return;
+    hindi_phrase = hindi_phrase.split(" ").map((e,id) => {
+      return {
+        id: `hindi-phrase-${id}`,
+        content: e
+      }
+    });
+
+    awadhi_phrase = awadhi_phrase.split(" ").map((e,id) => {
+      return {
+        id: `awadhi-phrase-${id}`,
+        content: e
+      }
+    });
+
+    this.setState({
+      itemsLeft: hindi_phrase,
+      itemsRight: awadhi_phrase
     });
   }
 
@@ -73,8 +114,8 @@ class App extends Component {
   // But in this example everything is just done in one place for simplicity
   render() {
     return (
-      <body className="container-fluid">
-        <div class="text-center my-5">
+      <div className="container-fluid">
+        <div className="text-center my-5">
             <h1>Hindi - Awadhi Translate</h1>
         </div>
         <div className="row">
@@ -93,12 +134,12 @@ class App extends Component {
             </Form>
           </div>
           <div className="col-2">
-            <Button>Generate</Button>
+            <Button onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
           </div>
         </div>
         <div className="row">
           <div className="col-6">
-            <DragDropContext onDragEnd={this.onDragEnd}>
+            <DragDropContext onDragEnd={this.onDragEndLeft}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
                   <div
@@ -106,7 +147,7 @@ class App extends Component {
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}
                   >
-                    {this.state.items.map((item, index) => (
+                    {this.state.itemsLeft.map((item, index) => (
                       <Draggable key={item.id} draggableId={item.id} index={index}>
                         {(provided, snapshot) => (
                           <div
@@ -130,7 +171,7 @@ class App extends Component {
             </DragDropContext>
           </div>
           <div className="col-6">
-            <DragDropContext onDragEnd={this.onDragEnd}>
+            <DragDropContext onDragEnd={this.onDragEndRight}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
                   <div
@@ -138,7 +179,7 @@ class App extends Component {
                     ref={provided.innerRef}
                     style={getListStyle(snapshot.isDraggingOver)}
                   >
-                    {this.state.items.map((item, index) => (
+                    {this.state.itemsRight.map((item, index) => (
                       <Draggable key={item.id} draggableId={item.id} index={index}>
                         {(provided, snapshot) => (
                           <div
@@ -162,10 +203,10 @@ class App extends Component {
             </DragDropContext>
           </div>
         </div>
-      </body>
+      </div>
     );
   }
 }
 
 // Put the thing into the DOM!
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App/>, document.getElementById("root"));
