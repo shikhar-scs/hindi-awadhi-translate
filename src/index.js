@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import RulesDisplay from "./rules_display.js"
+import fs from "fs";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -35,6 +36,18 @@ const getListStyle = isDraggingOver => ({
   padding: grid,
   width: 250
 });
+
+const writeToFile = (jsonContent) => {
+  // fs.writeFileSync("../public/translation_rules.json", jsonContent);
+  // console.log(jsonContent);
+  const fileData = JSON.stringify(jsonContent);
+  const blob = new Blob([fileData], {type: "text/plain"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = 'translation_rules.json';
+  link.href = url;
+  link.click();
+}
 
 class App extends Component {
   constructor(props) {
@@ -96,12 +109,12 @@ class App extends Component {
           .then(data => {
             hindiKeys.forEach((hindiKey,idx) => {
               if(hindiKey in data) {
-                data[hindiKey].add(awadhiVals[idx]);
+                data[hindiKey] = Array.from(new Set(data[hindiKey]).add(awadhiVals[idx]));
               } else {
-                data[hindiKey] = new Set([awadhiVals[idx]]);
+                data[hindiKey] = [awadhiVals[idx]];
               }
             })
-            console.log(data);
+            writeToFile(data);
           });
   }
 

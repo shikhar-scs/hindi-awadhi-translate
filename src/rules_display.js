@@ -26,7 +26,7 @@ class RulesDisplay extends React.Component {
                 <ul>
                     {
                         Object.keys(this.state.data).map((val, idx) => {
-                        return(<li>{val} -> {this.state.data[val].join(", ")}</li>);
+                        return(<li>{val} -> {Array.from(this.state.data[val]).join(", ")}</li>);
                         })
                     }
                 </ul>
