@@ -118,9 +118,21 @@ class App extends Component {
           });
   }
 
+  clean = (phrase) => {
+    return phrase
+    .replace("।","")
+    .replace("\'","")
+    .replace("\"","")
+    .trim();
+  }
+
   prepare = (hindi_phrase, awadhi_phrase) => {
     if(!hindi_phrase || !awadhi_phrase)
       return;
+
+      hindi_phrase = this.clean(hindi_phrase);
+      awadhi_phrase = this.clean(awadhi_phrase);
+    
     hindi_phrase = hindi_phrase.split(" ").map((e,id) => {
       return {
         id: `hindi-phrase-${id}`,
