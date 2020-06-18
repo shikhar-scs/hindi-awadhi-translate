@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import RulesDisplay from "./rules_display.js"
 import fs from "fs";
+import copy from "copy-to-clipboard";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -95,27 +96,49 @@ class App extends Component {
     });
   }
 
-  saveToFile = () => {
-    const hindiKeys = this.state.itemsLeft.map(val => val.content);
-    const awadhiVals = this.state.itemsRight.map(val => val.content);
+  add_to_localStorage = () => {
 
-    if(hindiKeys.length!==awadhiVals.length) {
+    let hindi_vals = []
+    document.querySelectorAll('.hindi-phrase').forEach((d)=>{
+        hindi_vals.push(d.innerText.split(".")[1])
+    })
+
+    let awadhi_vals = []
+    document.querySelectorAll('.awadhi-phrase').forEach((d)=>{
+        awadhi_vals.push(d.innerText.split(".")[1])
+    })
+
+    if(hindi_vals.length!==awadhi_vals.length) {
       alert("mappings are not one to one");
       return;
     }
 
-    fetch('/translation_rules.json')
-          .then(response => response.json())
-          .then(data => {
-            hindiKeys.forEach((hindiKey,idx) => {
-              if(hindiKey in data) {
-                data[hindiKey] = Array.from(new Set(data[hindiKey]).add(awadhiVals[idx]));
-              } else {
-                data[hindiKey] = [awadhiVals[idx]];
-              }
-            })
-            writeToFile(data);
-          });
+    let trans_map = JSON.parse(localStorage.getItem('trans_map'));
+//    console.log(trans_map)
+    if(trans_map===null){
+        trans_map = {}
+    }
+
+    for (let i=0;i<hindi_vals.length;i++){
+        if(hindi_vals[i] in trans_map) {
+            trans_map[hindi_vals[i]] += " | " + awadhi_vals[i]
+        }   else {
+            trans_map[hindi_vals[i]] = awadhi_vals[i]
+        }
+    }
+//    console.log(trans_map)
+    localStorage.setItem('trans_map', JSON.stringify(trans_map))
+//    console.log(JSON.parse(localStorage.getItem('trans_map')))
+  }
+
+  clear_localStorage = () => {
+     localStorage.setItem('trans_map', null)
+  }
+
+  copy_to_clipBoard = () => {
+     const info_string = localStorage.getItem('trans_map')
+     copy(info_string);
+//     console.log(info_string)
   }
 
   clean = (phrase) => {
@@ -241,7 +264,7 @@ class App extends Component {
             <Button className="btn-block  " id="awadhi_merge" onClick={this.merge}>Merge</Button>
           </div>
         </div>
-        <div className="row d-flex ">
+        <div className="row d-flex mb-5">
           <div className="col-6 d-flex justify-content-end">
             <DragDropContext onDragEnd={this.onDragEndLeft}>
               <Droppable droppableId="droppable">
@@ -312,7 +335,17 @@ class App extends Component {
             </DragDropContext>
           </div>
         </div>
-        <Button className="btn-success" onClick={()=>{this.saveToFile()}}>Save</Button>
+        <div className="row d-flex justify-content-center mb-3">
+            <div className="col-3 justify-content-center ">
+                <Button className="btn-block" id="hindi_merge" onClick={this.clear_localStorage}>Clear Localstorage</Button>
+            </div>
+            <div className="col-3 justify-content-center ">
+                <Button className="btn-block" id="hindi_merge" onClick={this.add_to_localStorage}>Add To Localstorage</Button>
+            </div>
+            <div className="col-3 justify-content-center ">
+                <Button className="btn-block" id="hindi_merge" onClick={this.copy_to_clipBoard}>Copy To Clipboard</Button>
+            </div>
+         </div>
       </div>
     );
   }
