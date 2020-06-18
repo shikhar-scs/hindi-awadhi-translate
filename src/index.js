@@ -82,6 +82,29 @@ class App extends Component {
     });
   }
 
+  saveToFile = () => {
+    const hindiKeys = this.state.itemsLeft.map(val => val.content);
+    const awadhiVals = this.state.itemsRight.map(val => val.content);
+
+    if(hindiKeys.length!==awadhiVals.length) {
+      alert("mappings are not one to one");
+      return;
+    }
+
+    fetch('/translation_rules.json')
+          .then(response => response.json())
+          .then(data => {
+            hindiKeys.forEach((hindiKey,idx) => {
+              if(hindiKey in data) {
+                data[hindiKey].add(awadhiVals[idx]);
+              } else {
+                data[hindiKey] = new Set([awadhiVals[idx]]);
+              }
+            })
+            console.log(data);
+          });
+  }
+
   prepare = (hindi_phrase, awadhi_phrase) => {
     if(!hindi_phrase || !awadhi_phrase)
       return;
@@ -265,6 +288,7 @@ class App extends Component {
             </DragDropContext>
           </div>
         </div>
+        <Button className="btn-success" onClick={()=>{this.saveToFile()}}>Save</Button>
       </div>
     );
   }

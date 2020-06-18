@@ -19,13 +19,18 @@ class RulesDisplay extends React.Component {
     render() {
        if(this.state.data!==null) {
            return(
-               <ul>
-                   {
-                       Object.keys(this.state.data).map((val, idx) => {
-                       return(<li>{val} -> {this.state.data[val].join(", ")}</li>);
-                       })
-                   }
-               </ul>
+               <div>
+                <div className="text-center my-5">
+                    <h1>Hindi - Awadhi Translation Rules</h1>
+                </div>
+                <ul>
+                    {
+                        Object.keys(this.state.data).map((val, idx) => {
+                        return(<li>{val} -> {this.state.data[val].join(", ")}</li>);
+                        })
+                    }
+                </ul>
+               </div>
            );
        }
        return (
