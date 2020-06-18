@@ -86,14 +86,18 @@ class App extends Component {
     hindi_phrase = hindi_phrase.split(" ").map((e,id) => {
       return {
         id: `hindi-phrase-${id}`,
-        content: e
+        content: e,
+        className: 'hindi-phrase',
+        idNo: id
       }
     });
 
     awadhi_phrase = awadhi_phrase.split(" ").map((e,id) => {
       return {
         id: `awadhi-phrase-${id}`,
-        content: e
+        content: e,
+        className: 'awadhi-phrase',
+        idNo: id
       }
     });
 
@@ -102,6 +106,21 @@ class App extends Component {
       itemsRight: awadhi_phrase
     });
   }
+
+  merge = (e) => {
+    try {
+        let lang = e.target.id.split("_")[0]
+        let left = Number(document.getElementById(`${lang}_phrase_merge_left`).value) - 1;
+        let right = Number(document.getElementById(`${lang}_phrase_merge_right`).value) -1 ;
+        let e1 = document.getElementById(`${lang}-phrase-${left}`);
+        let e2 = document.getElementById(`${lang}-phrase-${right}`);
+        e1.innerText = e1.innerText + " " + e2.innerText.split(" ")[1]
+        e2.remove()
+    }
+    catch(e)
+        { console.error(e); }
+  }
+
 
   render() {
     return (
@@ -113,14 +132,14 @@ class App extends Component {
           <div className="col-5">
             <Form>
               <Form.Group>
-                  <Form.Control id="hindi_phrase" type="email" placeholder="Enter Hindi sentence/phrase" />
+                  <Form.Control id="hindi_phrase" placeholder="Enter Hindi sentence/phrase" value="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
               </Form.Group>
             </Form>
           </div>
           <div className="col-5">
             <Form>
               <Form.Group>
-                <Form.Control id="awadhi_phrase" type="email" placeholder="Enter Awadhi sentence/phrase" />
+                <Form.Control id="awadhi_phrase" placeholder="Enter Awadhi sentence/phrase" value="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
               </Form.Group>
             </Form>
           </div>
@@ -129,7 +148,44 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-6">
+          <div className="col-2">
+            <Form>
+              <Form.Group>
+                  <Form.Control id="hindi_phrase_merge_left" placeholder="Enter Index of left word" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-2">
+            <Form>
+              <Form.Group>
+                <Form.Control id="hindi_phrase_merge_right" placeholder="Enter index of right word" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-1">
+            <Button id="hindi_merge" onClick={this.merge}>Merge</Button>
+          </div>
+          <div className="col-2">
+            <Form>
+              <Form.Group>
+                  <Form.Control id="awadhi_phrase_merge_left" placeholder="Enter Index of left word" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-2">
+            <Form>
+              <Form.Group>
+                <Form.Control id="awadhi_phrase_merge_right" placeholder="Enter index of right word" />
+              </Form.Group>
+            </Form>
+          </div>
+          <div className="col-1">
+            <Button id="awadhi_merge" onClick={this.merge}>Merge</Button>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-5">
             <DragDropContext onDragEnd={this.onDragEndLeft}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
@@ -143,6 +199,8 @@ class App extends Component {
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
+                            className={item.className}
+                            id={item.id}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             style={getItemStyle(
@@ -150,7 +208,7 @@ class App extends Component {
                               provided.draggableProps.style
                             )}
                           >
-                            {item.content}
+                           {item.idNo +1}.       {item.content}
                           </div>
                         )}
                       </Draggable>
@@ -161,7 +219,7 @@ class App extends Component {
               </Droppable>
             </DragDropContext>
           </div>
-          <div className="col-6">
+          <div className="col-5">
             <DragDropContext onDragEnd={this.onDragEndRight}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
@@ -175,6 +233,8 @@ class App extends Component {
                         {(provided, snapshot) => (
                           <div
                             ref={provided.innerRef}
+                            className={item.className}
+                            id={item.id}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             style={getItemStyle(
@@ -182,7 +242,7 @@ class App extends Component {
                               provided.draggableProps.style
                             )}
                           >
-                            {item.content}
+                            {item.idNo +1}.    {item.content}
                           </div>
                         )}
                       </Draggable>
