@@ -18,7 +18,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 const grid = 8;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
+const getItemStyle = (isDragging, draggableStyle, isHindi) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 1,
@@ -26,7 +26,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 
   // change background colour if dragging
   background: isDragging ? "lightgreen" : "white",
-
+  textAlign: isHindi? "right":"left",
   // styles we need to apply on draggables
   ...draggableStyle
 });
@@ -120,9 +120,8 @@ class App extends Component {
 
   clean = (phrase) => {
     return phrase
-    .replace("।","")
-    .replace("\'","")
-    .replace("\"","")
+    .replace(/[।"“”'.,/#!$%^&*;:{}=-_`~()]/g,"")
+    .replace(/\s{2,}/g," ")
     .trim();
   }
 
@@ -170,7 +169,6 @@ class App extends Component {
     catch(e)
         { console.error(e); }
   }
-
 
   render() {
     if(this.state.showRules) {
@@ -264,7 +262,8 @@ class App extends Component {
                             {...provided.dragHandleProps}
                             style={getItemStyle(
                               snapshot.isDragging,
-                              provided.draggableProps.style
+                              provided.draggableProps.style,
+                              true
                             )}
                           >
                            {item.idNo +1}.       {item.content}
