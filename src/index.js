@@ -4,6 +4,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
+import RulesDisplay from "./rules_display.js"
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -39,6 +40,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showRules: false,
       itemsLeft: [{id: 'empty - 0', content: "empty"}],
       itemsRight: [{id: 'empty - 0', content: "empty"}]
     };
@@ -123,10 +125,14 @@ class App extends Component {
 
 
   render() {
+    if(this.state.showRules) {
+      return <RulesDisplay/>;
+    }
     return (
       <div className="container-fluid">
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translate</h1>
+            <a onClick={()=>{this.setState({showRules: true})}}>show rules</a>
         </div>
         <div className="row">
           <div className="col-5 offset-1 justify-content-end">
