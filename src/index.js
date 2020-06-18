@@ -19,18 +19,18 @@ const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  padding: grid * 2,
+  padding: grid * 1,
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : "white",
 
   // styles we need to apply on draggables
   ...draggableStyle
 });
 
 const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
+  background: isDraggingOver ? "#192746" : "#192746",
   padding: grid,
   width: 250
 });
@@ -128,8 +128,8 @@ class App extends Component {
             <Button onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
           </div>
         </div>
-        <div className="row">
-          <div className="col-6">
+        <div className="row d-flex justify-content-center">
+          <div className="col-4 d-flex justify-content-center">
             <DragDropContext onDragEnd={this.onDragEndLeft}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
@@ -161,7 +161,7 @@ class App extends Component {
               </Droppable>
             </DragDropContext>
           </div>
-          <div className="col-6">
+          <div className="col-4 d-flex justify-content-center">
             <DragDropContext onDragEnd={this.onDragEndRight}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
