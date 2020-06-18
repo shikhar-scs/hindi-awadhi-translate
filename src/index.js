@@ -129,26 +129,29 @@ class App extends Component {
             <h1>Hindi - Awadhi Translate</h1>
         </div>
         <div className="row">
-          <div className="col-5">
+          <div className="col-5 offset-1 justify-content-end">
             <Form>
               <Form.Group>
-                  <Form.Control id="hindi_phrase" placeholder="Enter Hindi sentence/phrase" value="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
+                  <Form.Control id="hindi_phrase" placeholder="Enter Hindi sentence/phrase" defaultValue="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
               </Form.Group>
             </Form>
           </div>
           <div className="col-5">
             <Form>
               <Form.Group>
-                <Form.Control id="awadhi_phrase" placeholder="Enter Awadhi sentence/phrase" value="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
+                <Form.Control id="awadhi_phrase" placeholder="Enter Awadhi sentence/phrase" defaultValue="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
               </Form.Group>
             </Form>
           </div>
-          <div className="col-2">
-            <Button onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
+                  </div>
+
+          <div className="row d-flex justify-content-center mb-3">
+              <div className="col-3 justify-content-center">
+                <Button type="button" className="btn btn-block " onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
+              </div>
           </div>
-        </div>
-        <div className="row ">
-          <div className="col-2">
+        <div className="row d-flex justify-content-center">
+          <div className=" col-2">
             <Form>
               <Form.Group>
                   <Form.Control id="hindi_phrase_merge_left" placeholder="Enter Index of left word" />
@@ -162,9 +165,11 @@ class App extends Component {
               </Form.Group>
             </Form>
           </div>
-          <div className="col-1">
-            <Button id="hindi_merge" onClick={this.merge}>Merge</Button>
+          <div className="col-1 justify-content-center ">
+            <Button className="btn-block" id="hindi_merge" onClick={this.merge}>Merge</Button>
           </div>
+
+
           <div className="col-2">
             <Form>
               <Form.Group>
@@ -179,12 +184,13 @@ class App extends Component {
               </Form.Group>
             </Form>
           </div>
+
           <div className="col-1">
-            <Button id="awadhi_merge" onClick={this.merge}>Merge</Button>
+            <Button className="btn-block  " id="awadhi_merge" onClick={this.merge}>Merge</Button>
           </div>
         </div>
-        <div className="row d-flex justify-content-center">
-          <div className="col-4 d-flex justify-content-center">
+        <div className="row d-flex ">
+          <div className="col-6 d-flex justify-content-end">
             <DragDropContext onDragEnd={this.onDragEndLeft}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
@@ -218,7 +224,7 @@ class App extends Component {
               </Droppable>
             </DragDropContext>
           </div>
-          <div className="col-4 d-flex justify-content-center">
+          <div className="col-6 d-flex justify-content-left">
             <DragDropContext onDragEnd={this.onDragEndRight}>
               <Droppable droppableId="droppable">
                 {(provided, snapshot) => (
