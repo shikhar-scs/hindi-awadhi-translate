@@ -86,8 +86,15 @@ class App extends Component {
 
   add_to_localStorage = () => {
 
-    let hindi_vals = this.state.itemsLeft.map((val) => val.content);
-    const awadhi_vals = this.state.itemsRight.map((val) => val.content);
+      let hindi_vals = []
+      document.querySelectorAll('.hindi-phrase').forEach((d)=>{
+          hindi_vals.push(d.innerText.split(".")[1].trim())
+      })
+
+      let awadhi_vals = []
+      document.querySelectorAll('.awadhi-phrase').forEach((d)=>{
+          awadhi_vals.push(d.innerText.split(".")[1].trim())
+      })
 
     if(hindi_vals.length!==awadhi_vals.length) {
       alert("mappings are not one to one");
