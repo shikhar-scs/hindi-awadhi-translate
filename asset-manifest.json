@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hindi-awadhi-translate/static/css/main.5cfdc261.chunk.css",
-    "main.js": "/hindi-awadhi-translate/static/js/main.f5aac9c6.chunk.js",
-    "main.js.map": "/hindi-awadhi-translate/static/js/main.f5aac9c6.chunk.js.map",
+    "main.js": "/hindi-awadhi-translate/static/js/main.715beb26.chunk.js",
+    "main.js.map": "/hindi-awadhi-translate/static/js/main.715beb26.chunk.js.map",
     "runtime-main.js": "/hindi-awadhi-translate/static/js/runtime-main.80ddb6d2.js",
     "runtime-main.js.map": "/hindi-awadhi-translate/static/js/runtime-main.80ddb6d2.js.map",
     "static/css/2.af3c1da9.chunk.css": "/hindi-awadhi-translate/static/css/2.af3c1da9.chunk.css",
     "static/js/2.97b4076e.chunk.js": "/hindi-awadhi-translate/static/js/2.97b4076e.chunk.js",
     "static/js/2.97b4076e.chunk.js.map": "/hindi-awadhi-translate/static/js/2.97b4076e.chunk.js.map",
     "index.html": "/hindi-awadhi-translate/index.html",
-    "precache-manifest.6d27435f3d31c1c49713e3294f870183.js": "/hindi-awadhi-translate/precache-manifest.6d27435f3d31c1c49713e3294f870183.js",
+    "precache-manifest.326c01bd649a9859867cf1bfb54aa26b.js": "/hindi-awadhi-translate/precache-manifest.326c01bd649a9859867cf1bfb54aa26b.js",
     "service-worker.js": "/hindi-awadhi-translate/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/hindi-awadhi-translate/static/css/2.af3c1da9.chunk.css.map",
     "static/css/main.5cfdc261.chunk.css.map": "/hindi-awadhi-translate/static/css/main.5cfdc261.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.af3c1da9.chunk.css",
     "static/js/2.97b4076e.chunk.js",
     "static/css/main.5cfdc261.chunk.css",
-    "static/js/main.f5aac9c6.chunk.js"
+    "static/js/main.715beb26.chunk.js"
   ]
 }
