@@ -117,6 +117,7 @@ class App extends Component {
 //    console.log(trans_map)
     localStorage.setItem('trans_map', JSON.stringify(trans_map))
 //    console.log(JSON.parse(localStorage.getItem('trans_map')))
+      window.location.reload();
   }
 
   clear_localStorage = () => {
