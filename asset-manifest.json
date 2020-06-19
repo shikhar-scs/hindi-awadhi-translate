@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/hindi-awadhi-translate/static/css/main.5cfdc261.chunk.css",
+    "main.js": "/hindi-awadhi-translate/static/js/main.8e9eaeaf.chunk.js",
+    "main.js.map": "/hindi-awadhi-translate/static/js/main.8e9eaeaf.chunk.js.map",
+    "runtime-main.js": "/hindi-awadhi-translate/static/js/runtime-main.80ddb6d2.js",
+    "runtime-main.js.map": "/hindi-awadhi-translate/static/js/runtime-main.80ddb6d2.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/hindi-awadhi-translate/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.97b4076e.chunk.js": "/hindi-awadhi-translate/static/js/2.97b4076e.chunk.js",
+    "static/js/2.97b4076e.chunk.js.map": "/hindi-awadhi-translate/static/js/2.97b4076e.chunk.js.map",
+    "index.html": "/hindi-awadhi-translate/index.html",
+    "precache-manifest.0d47ca954dcd988547bc83f17e34a548.js": "/hindi-awadhi-translate/precache-manifest.0d47ca954dcd988547bc83f17e34a548.js",
+    "service-worker.js": "/hindi-awadhi-translate/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/hindi-awadhi-translate/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.5cfdc261.chunk.css.map": "/hindi-awadhi-translate/static/css/main.5cfdc261.chunk.css.map",
+    "static/js/2.97b4076e.chunk.js.LICENSE.txt": "/hindi-awadhi-translate/static/js/2.97b4076e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.80ddb6d2.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.97b4076e.chunk.js",
+    "static/css/main.5cfdc261.chunk.css",
+    "static/js/main.8e9eaeaf.chunk.js"
+  ]
+}
