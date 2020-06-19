@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/hindi-awadhi-translate/precache-manifest.0d47ca954dcd988547bc83f17e34a548.js"
+  "/hindi-awadhi-translate/precache-manifest.6d27435f3d31c1c49713e3294f870183.js"
 );
 
 self.addEventListener('message', (event) => {
