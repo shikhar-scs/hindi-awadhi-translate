@@ -5,7 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import RulesDisplay from "./rules_display.js"
-import fs from "fs";
+// import fs from "fs";
 import copy from "copy-to-clipboard";
 
 // a little function to help us with reordering the result
@@ -37,18 +37,6 @@ const getListStyle = isDraggingOver => ({
   padding: grid,
   width: 250
 });
-
-const writeToFile = (jsonContent) => {
-  // fs.writeFileSync("../public/translation_rules.json", jsonContent);
-  // console.log(jsonContent);
-  const fileData = JSON.stringify(jsonContent);
-  const blob = new Blob([fileData], {type: "text/plain"});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.download = 'translation_rules.json';
-  link.href = url;
-  link.click();
-}
 
 class App extends Component {
   constructor(props) {
@@ -98,15 +86,8 @@ class App extends Component {
 
   add_to_localStorage = () => {
 
-    let hindi_vals = []
-    document.querySelectorAll('.hindi-phrase').forEach((d)=>{
-        hindi_vals.push(d.innerText.split(".")[1])
-    })
-
-    let awadhi_vals = []
-    document.querySelectorAll('.awadhi-phrase').forEach((d)=>{
-        awadhi_vals.push(d.innerText.split(".")[1])
-    })
+    let hindi_vals = this.state.itemsLeft.map((val) => val.content);
+    const awadhi_vals = this.state.itemsRight.map((val) => val.content);
 
     if(hindi_vals.length!==awadhi_vals.length) {
       alert("mappings are not one to one");
@@ -121,9 +102,9 @@ class App extends Component {
 
     for (let i=0;i<hindi_vals.length;i++){
         if(hindi_vals[i] in trans_map) {
-            trans_map[hindi_vals[i]] += " | " + awadhi_vals[i]
+            trans_map[hindi_vals[i]] = Array.from(new Set(trans_map[hindi_vals[i]]).add(awadhi_vals[i]));
         }   else {
-            trans_map[hindi_vals[i]] = awadhi_vals[i]
+            trans_map[hindi_vals[i]] = Array.from([awadhi_vals[i]])
         }
     }
 //    console.log(trans_map)
@@ -133,11 +114,13 @@ class App extends Component {
 
   clear_localStorage = () => {
      localStorage.setItem('trans_map', null)
+      alert("cleared local storage");
   }
 
   copy_to_clipBoard = () => {
      const info_string = localStorage.getItem('trans_map')
      copy(info_string);
+     alert("copied to clipboard");
 //     console.log(info_string)
   }
 
@@ -201,28 +184,29 @@ class App extends Component {
       <div className="container-fluid">
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translate</h1>
-            <a onClick={()=>{this.setState({showRules: true})}}>show rules</a>
+            click <Button className="btn-dark" onClick={()=>{this.setState({showRules: true})}}>here</Button> to view your rules you have created so far
         </div>
-        <div className="row">
-          <div className="col-5 offset-1 justify-content-end">
+        <div className="row d-flex justify-content-center">
+          <div className="col-5">
             <Form>
               <Form.Group>
-                  <Form.Control id="hindi_phrase" placeholder="Enter Hindi sentence/phrase" defaultValue="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
+                  <Form.Label className="text-danger">Hindi Sentence/Phrase</Form.Label>
+                  <Form.Control id="hindi_phrase" placeholder="Enter Hindi sentence/phrase" defaultValue="याकूब के अपने वंश में सत्तर लोग थे।"/>
               </Form.Group>
             </Form>
           </div>
           <div className="col-5">
             <Form>
               <Form.Group>
-                <Form.Control id="awadhi_phrase" placeholder="Enter Awadhi sentence/phrase" defaultValue="4. परमेश्वर ने उजियाले को देखा और वह जान गया कि यह अच्छा है। तब परमेश्वर ने उजियाले को अंधियारे से अलग किया।"/>
+                  <Form.Label className="text-danger">Awadhi Sentence/Phrase</Form.Label>
+                  <Form.Control id="awadhi_phrase" placeholder="Enter Awadhi sentence/phrase" defaultValue="याकूब क आपन सन्तानन मँ सत्तर लोग रहेन।"/>
               </Form.Group>
             </Form>
           </div>
-                  </div>
-
+        </div>
           <div className="row d-flex justify-content-center mb-3">
               <div className="col-3 justify-content-center">
-                <Button type="button" className="btn btn-block " onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
+                  <Button type="button" className="btn btn-block " onClick={()=>{this.prepare(document.getElementById("hindi_phrase").value, document.getElementById("awadhi_phrase").value)}}>Generate</Button>
               </div>
           </div>
         <div className="row d-flex justify-content-center">
@@ -240,8 +224,8 @@ class App extends Component {
               </Form.Group>
             </Form>
           </div>
-          <div className="col-1 justify-content-center ">
-            <Button className="btn-block" id="hindi_merge" onClick={this.merge}>Merge</Button>
+          <div className="col-2">
+            <Button className="btn-dark" id="hindi_merge" onClick={this.merge}>Merge</Button>
           </div>
 
 
@@ -260,8 +244,8 @@ class App extends Component {
             </Form>
           </div>
 
-          <div className="col-1">
-            <Button className="btn-block  " id="awadhi_merge" onClick={this.merge}>Merge</Button>
+          <div className="col-2">
+            <Button className="btn-dark" id="awadhi_merge" onClick={this.merge}>Merge</Button>
           </div>
         </div>
         <div className="row d-flex mb-5">

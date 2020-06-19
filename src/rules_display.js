@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 class RulesDisplay extends React.Component {
     constructor(props) {
@@ -11,9 +11,10 @@ class RulesDisplay extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/translation_rules.json')
-          .then(response => response.json())
-          .then(data => this.setState({ data }));
+        const data = localStorage.getItem("trans_map");
+        if(data!==null) {
+            this.setState({data: JSON.parse(data)})
+        }
     }
 
     render() {
@@ -22,6 +23,7 @@ class RulesDisplay extends React.Component {
                <div>
                 <div className="text-center my-5">
                     <h1>Hindi - Awadhi Translation Rules</h1>
+                    <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
                 </div>
                 <ul>
                     {
@@ -36,6 +38,7 @@ class RulesDisplay extends React.Component {
        return (
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translation Rules</h1>
+            <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
         </div>
        )
     }
