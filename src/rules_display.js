@@ -23,7 +23,7 @@ class RulesDisplay extends React.Component {
                <div>
                 <div className="text-center my-5">
                     <h1>Hindi - Awadhi Translation Rules</h1>
-                    <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
+                    <a style={{cursor: "pointer", color: "#f51010"}} href="https://shikhar-scs.github.io/hindi-awadhi-translate/">back to home</a>
                 </div>
                 <ul>
                     {
@@ -38,7 +38,7 @@ class RulesDisplay extends React.Component {
        return (
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translation Rules</h1>
-            <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
+            <a style={{cursor: "pointer", color: "#f51010"}} href="https://shikhar-scs.github.io/hindi-awadhi-translate/">back to home</a>
         </div>
        )
     }
