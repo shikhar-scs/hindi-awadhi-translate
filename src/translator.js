@@ -32,13 +32,18 @@ class Translator extends React.Component {
     }
 
     transalte = () => {
-        const hs = document.getElementById("hindi_sentence").value.split(" ");
+        let hs = document.getElementById("hindi_sentence").value.split(" ");
         let as = hs.map((val) => {
             if(val in this.state.rules)
-                return this.state.rules[val][0];
-            return val;
+                return (<b style={{color: '#dc3545'}} title={val}>{this.state.rules[val][0]} </b>);
+            return (<span>{val} </span>);
         });
-        this.setState({hs: hs.join(" "), as: as.join(" ")});
+
+        hs = hs.map((val) => {
+            return (<span>{val} </span>);
+        });
+
+        this.setState({hs: hs, as: as});
     }
 
     render() {
