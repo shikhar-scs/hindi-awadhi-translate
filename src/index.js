@@ -5,6 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import RulesDisplay from "./rules_display.js"
+import Translator from "./translator.js"
 // import fs from "fs";
 import copy from "copy-to-clipboard";
 
@@ -43,6 +44,7 @@ class App extends Component {
     super(props);
     this.state = {
       showRules: false,
+      showTranslator: false,
       itemsLeft: [{id: 'empty - 0', content: "empty"}],
       itemsRight: [{id: 'empty - 0', content: "empty"}]
     };
@@ -188,11 +190,18 @@ class App extends Component {
     if(this.state.showRules) {
       return <RulesDisplay/>;
     }
+
+    if(this.state.showTranslator) {
+      return <Translator/>;
+    }
+
     return (
       <div className="container-fluid">
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translate</h1>
-            <Button bsStyle="danger" className="btn-success" onClick={()=>{this.setState({showRules: true})}}> click here to view your rules you have created so far </Button>
+            <Button bsStyle="danger" className="btn-success" onClick={()=>{this.setState({showRules: true})}}> click here to view your rules you have created so far</Button>
+            <br/>
+            <Button bsStyle="danger" className="btn-info mt-3" onClick={()=>{this.setState({showTranslator: true})}}> click here to view translator</Button>
         </div>
         <div className="row d-flex justify-content-center">
           <div className="col-5">
