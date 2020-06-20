@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "44b96e51b1d7ba368b6ae137e7cf4097",
+    "revision": "fed3436f3e24eb89d1ca3da2e1f7a8e0",
     "url": "/hindi-awadhi-translate/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hindi-awadhi-translate/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "ccbc068d0764544e73ab",
+    "revision": "5970444cb57a24746ad5",
     "url": "/hindi-awadhi-translate/static/css/main.5cfdc261.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hindi-awadhi-translate/static/js/2.f18088b6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ccbc068d0764544e73ab",
-    "url": "/hindi-awadhi-translate/static/js/main.c1c00a43.chunk.js"
+    "revision": "5970444cb57a24746ad5",
+    "url": "/hindi-awadhi-translate/static/js/main.03272f8d.chunk.js"
   },
   {
     "revision": "577ba5d0377be5e17d5c",
