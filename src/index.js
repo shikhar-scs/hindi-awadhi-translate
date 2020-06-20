@@ -192,7 +192,7 @@ class App extends Component {
       <div className="container-fluid">
         <div className="text-center my-5">
             <h1>Hindi - Awadhi Translate</h1>
-            click <Button className="btn-dark" onClick={()=>{this.setState({showRules: true})}}>here</Button> to view your rules you have created so far
+            <Button bsStyle="danger" className="btn-success" onClick={()=>{this.setState({showRules: true})}}> click here to view your rules you have created so far </Button>
         </div>
         <div className="row d-flex justify-content-center">
           <div className="col-5">
@@ -218,7 +218,7 @@ class App extends Component {
               </div>
           </div>
         <div className="row d-flex justify-content-center">
-          <div className=" col-2">
+          <div className="offset-1 col-2">
             <Form>
               <Form.Group>
                   <Form.Control id="hindi_phrase_merge_left" placeholder="Enter Index of left word" />
@@ -232,7 +232,7 @@ class App extends Component {
               </Form.Group>
             </Form>
           </div>
-          <div className="col-2">
+          <div className="col-1">
             <Button className="btn-dark" id="hindi_merge" onClick={this.merge}>Merge</Button>
           </div>
 
