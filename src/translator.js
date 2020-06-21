@@ -52,7 +52,7 @@ class Translator extends React.Component {
                <div>
                 <div className="text-center my-5">
                     <h1>Hindi - Awadhi Translation Rules</h1>
-                    <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
+                    <a style={{cursor: "pointer", color: "#f51010"}} href={window.location.host==="shikhar-scs.github.io" ? "/hindi-awadhi-translate" : "/"}>back to home</a>
                 </div>
                 <div className="row d-flex justify-content-center">
                     <div className="col-6">
@@ -84,7 +84,7 @@ class Translator extends React.Component {
         <div>
             <div className="text-center my-5">
                 <h1>Hindi - Awadhi Translator</h1>
-                <a style={{cursor: "pointer", color: "#f51010"}} href="/">back to home</a>
+                <a style={{cursor: "pointer", color: "#f51010"}} href={window.location.host==="shikhar-scs.github.io" ? "/hindi-awadhi-translate" : "/"}>back to home</a>
             </div>
             <div className="row d-flex justify-content-center">
                 <div className="col-8">
